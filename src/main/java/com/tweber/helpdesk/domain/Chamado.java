@@ -3,21 +3,27 @@ package com.tweber.helpdesk.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.tweber.helpdesk.domain.enums.Prioridade;
 import com.tweber.helpdesk.domain.enums.Status;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-@Data
-@Builder
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 public class Chamado implements Serializable {
+
+    public Chamado(Integer id, Prioridade prioridade, Status status, String titulo, String observacoes, Tecnico tecnico, Cliente cliente) {
+        this.id = id;
+        this.prioridade = prioridade;
+        this.status = status;
+        this.titulo = titulo;
+        this.observacoes = observacoes;
+        this.tecnico = tecnico;
+        this.cliente = cliente;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
