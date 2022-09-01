@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
-@NoArgsConstructor
 public class TecnicoDTO implements Serializable {
 
     protected Long id;
@@ -28,6 +27,10 @@ public class TecnicoDTO implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate dataCriacao = LocalDate.now();
 
+    public TecnicoDTO() {
+        addPerfil(Perfil.TECNICO);
+    }
+
     public TecnicoDTO(Tecnico tecnico) {
         this.id = tecnico.getId();
         this.nome = tecnico.getNome();
@@ -36,6 +39,7 @@ public class TecnicoDTO implements Serializable {
         this.senha = tecnico.getSenha();
         this.perfis = tecnico.getPerfis().stream().map(Perfil::getCodigo).collect(Collectors.toSet());
         this.dataCriacao = tecnico.getDataCriacao();
+        addPerfil(Perfil.TECNICO);
     }
 
     public Set<Perfil> getPerfis() {

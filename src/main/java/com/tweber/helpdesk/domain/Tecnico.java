@@ -1,6 +1,7 @@
 package com.tweber.helpdesk.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tweber.helpdesk.domain.dtos.TecnicoDTO;
 import com.tweber.helpdesk.domain.enums.Perfil;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -25,4 +27,14 @@ public class Tecnico extends Pessoa {
     @JsonIgnore
     @OneToMany(mappedBy = "tecnico")
     private List<Chamado> chamados = new ArrayList<>();
+
+    public Tecnico(TecnicoDTO tecnicoDTO) {
+        this.id = tecnicoDTO.getId();
+        this.nome = tecnicoDTO.getNome();
+        this.cpf = tecnicoDTO.getCpf();
+        this.email = tecnicoDTO.getEmail();
+        this.senha = tecnicoDTO.getSenha();
+        this.perfis = tecnicoDTO.getPerfis().stream().map(Perfil::getCodigo).collect(Collectors.toSet());
+        this.dataCriacao = tecnicoDTO.getDataCriacao();
+    }
 }
