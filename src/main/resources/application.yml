@@ -7,11 +7,32 @@ spring:
 
   datasource:
     url: jdbc:h2:mem:testdb
-    usename: sa
+    username: sa
     password:
     driver-class-name: org.h2.Driver
 
   jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+---
+
+spring:
+  profiles: dev
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/helpdesk
+    username: root
+    password:
+
+  jpa:
+    hibernate:
+      dll-auto: none
+
+    generate-ddl: false
+
     show-sql: true
     properties:
       hibernate:
