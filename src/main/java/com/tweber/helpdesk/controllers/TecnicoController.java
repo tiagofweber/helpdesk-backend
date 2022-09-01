@@ -1,6 +1,7 @@
 package com.tweber.helpdesk.controllers;
 
 import com.tweber.helpdesk.domain.Tecnico;
+import com.tweber.helpdesk.domain.dtos.TecnicoDTO;
 import com.tweber.helpdesk.services.TecnicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,8 @@ public class TecnicoController {
     private TecnicoService service;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Tecnico> findById(@PathVariable Long id) {
+    public ResponseEntity<TecnicoDTO> findById(@PathVariable Long id) {
         Tecnico tecnico = service.findById(id);
-        return ResponseEntity.ok(tecnico);
+        return ResponseEntity.ok(new TecnicoDTO(tecnico));
     }
 }
