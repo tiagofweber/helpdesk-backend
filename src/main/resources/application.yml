@@ -12,6 +12,12 @@ spring:
     driver-class-name: org.h2.Driver
 
   jpa:
+    jpa:
+      hibernate:
+        dll-auto: update
+
+      generate-ddl: true
+
     show-sql: true
     properties:
       hibernate:
