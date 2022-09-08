@@ -39,6 +39,14 @@ public class TecnicoService {
         return repository.save(tecnico);
     }
 
+    public Tecnico update(Long id, TecnicoDTO tecnicoDTO) {
+        tecnicoDTO.setId(id);
+        Tecnico oldTecnico = findById(id);
+        validaPorCpfEEmail(tecnicoDTO);
+        oldTecnico = new Tecnico(tecnicoDTO);
+        return repository.save(oldTecnico);
+    }
+
     private void validaPorCpfEEmail(TecnicoDTO tecnicoDTO) {
         Optional<Pessoa> pessoa = pessoaRepository.findByCpf(tecnicoDTO.getCpf());
         if (pessoa.isPresent() && !Objects.equals(pessoa.get().getId(), tecnicoDTO.getId())) {

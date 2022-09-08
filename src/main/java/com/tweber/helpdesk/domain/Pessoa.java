@@ -3,6 +3,7 @@ package com.tweber.helpdesk.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.tweber.helpdesk.domain.enums.Perfil;
 import lombok.*;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -32,6 +33,7 @@ public abstract class Pessoa implements Serializable {
 
     protected String nome;
 
+    @CPF
     @Column(unique = true)
     protected String cpf;
 
