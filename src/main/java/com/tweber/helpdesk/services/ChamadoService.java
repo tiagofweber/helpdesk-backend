@@ -11,6 +11,7 @@ import com.tweber.helpdesk.repositories.ChamadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +40,13 @@ public class ChamadoService {
         return repository.save(newChamado(chamadoDTO));
     }
 
+    public Chamado update(Long id, ChamadoDTO chamadoDTO) {
+        chamadoDTO.setId(id);
+        findById(id);
+        Chamado chamado = newChamado(chamadoDTO);
+        return repository.save(chamado);
+    }
+
     private Chamado newChamado(ChamadoDTO chamadoDTO) {
         Tecnico tecnico = tecnicoService.findById(chamadoDTO.getTecnico());
         Cliente cliente = clienteService.findById(chamadoDTO.getCliente());
@@ -47,6 +55,9 @@ public class ChamadoService {
         if (chamadoDTO.getId() != null) {
             chamado.setId(chamadoDTO.getId());
         }
+
+        if (chamadoDTO.getStatus().equals(2))
+            chamado.setDataFechamento(LocalDate.now());
 
         chamado.setTecnico(tecnico);
         chamado.setCliente(cliente);
