@@ -23,6 +23,10 @@ spring:
       hibernate:
         format_sql: true
 
+jwt:
+  secret: StringUsadaParaGerarToken
+  expiration: 180000
+
 ---
 
 spring:
@@ -43,3 +47,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+jwt:
+  secret: StringUsadaParaGerarToken
+  expiration: 180000
