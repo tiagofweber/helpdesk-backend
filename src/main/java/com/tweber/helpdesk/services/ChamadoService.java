@@ -6,6 +6,7 @@ import com.tweber.helpdesk.repositories.ChamadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,5 +18,9 @@ public class ChamadoService {
     public Chamado findById(Long id) {
         Optional<Chamado> chamado = repository.findById(id);
         return chamado.orElseThrow(() -> new ObjectNotFoundException(String.format("Objeto não encontrado! ID: %s", id)));
+    }
+
+    public List<Chamado> findAll() {
+        return repository.findAll();
     }
 }
